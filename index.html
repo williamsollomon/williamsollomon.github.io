@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Rangkuman TIK UAS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            position: relative;
+            background-color: rgba(242, 233, 228);
+            font-family: 'Poppins';
+            z-index: 0;
+        }
+        header {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+            min-height: 80vh;
+            padding-top: 3rem;
+            padding-bottom: 10rem;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(242, 233, 228);
+            background: url("https://i.imgur.com/mRPDRcL.png") center center/cover;
+            background-blend-mode: screen;
+            opacity: 0.2;
+            z-index: -1;
+            transition: all 0.5s;
+        }
+        header:has(.title:hover)::after {
+            transform: rotate(-2deg);
+            opacity: 1;
+            transition: opacity 0.5s rotate 0.5s;
+        }
+        header:has(.subtitle:hover)::after {
+            transform: rotate(2deg);
+            opacity: 1;
+            transition: opacity 0.5s rotate 0.5s;
+        }
+
+
+        .title {
+            position: relative;
+            /* margin-top: clamp(10rem, 15vh, 12rem); */
+            font-family: "Playfair Display", serif;
+            font-weight: 500;
+            font-size: clamp(5rem, 10vw, 8.75rem);
+            color: rgba(74, 78, 105);
+            text-align: center;
+            letter-spacing: -0.9rem;
+            transform: rotate(-2deg);
+            transition: all 0.5s;
+            padding: 0 1rem;
+        }
+        .title:hover {
+            transform: rotate(0deg) scale(1.05);
+            transform: skewX(20deg);
+        }
+
+        .title2{
+            position: relative;
+            margin-top: clamp(6rem, 27vh, 16rem);
+            font-family: "Playfair Display", serif;
+            font-weight: 500;
+            font-size: clamp(1rem, 10vw, 2rem);
+            color: rgba(74, 78, 105);
+            letter-spacing: -0.1rem;
+            text-align: center;
+            transition: all 0.5s;
+            padding: 0 1rem;
+        }
+        .subtitle {
+            position: relative;
+            padding: -3px;
+            font-family: "Playfair Display";
+            font-size: 30px;
+            font-weight: 100;
+            color: rgba(154, 140, 152);
+            text-align: center;
+            transition: all 0.5s;
+        }
+        .subtitle em {
+            font-style: italic;
+            font-weight: 800;
+        }
+        .subtitle:hover {
+            transform: rotate(0deg) scale(1.05);
+            transform: skewX(20deg);
+        }
+
+        .subtitle2{
+            position: relative;
+            padding-top: 2rem;
+            display:block;
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            word-spacing: 2px;
+            max-width: 800px;
+            font-size: 20px;
+            font-weight: 100;
+            margin: 0 auto;
+            width:fit-content;
+            color: rgba(154, 140, 152);
+            text-align: center;
+            transition: all 0.5s;
+        }
+
+        .subtitle2 em {
+            font-style: italic;
+            font-weight: 800;
+        }
+
+        .subtitle2:hover {
+            transform: rotate(0deg) scale(1.05);
+            /* transform: skewX(20deg); */
+        }
+        
+        nav {
+            position: fixed;
+            display: flex;
+            background-color: rgb(34, 34, 59);
+            box-shadow: 5px 5px 10px rgba(20, 20, 100, 0.3);
+            color: rgba(225, 225, 255);
+            width: 100%;
+            min-height: 3rem;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.7rem;
+            transition: all 0.2s;
+            z-index: 99;
+        }
+        nav a, nav button {
+            display: inline-flex;
+            font-size: large;
+            font-family: "Playfair Display";
+            text-decoration: none;
+            color: rgba(225, 225, 255);
+            transition: all 0.5s;
+            display: inline-block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        nav a:hover, nav button:hover {
+            transform: scale(1.2);
+        }
+        nav em {
+            font-style: italic;
+            font-weight: 800;
+        }
+        .content-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        .chapter-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: rgba(74, 78, 105);
+            text-align: center;
+            margin: 6rem 0 3rem 0;
+            transform: rotate(-1deg);
+            transition: all 0.3s;
+        }
+        .chapter-title:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+        .chapter-title em {
+            font-style: italic;
+            font-weight: 800;
+        }
+        .boxes {
+            margin: 3rem auto;
+            color: rgb(247, 241, 238);
+            position: relative;
+            background-color: rgba(201, 173, 167);
+            max-width: 900px;
+            min-height: 20rem;
+            border-radius: 15px;
+            padding: 3rem;
+            transform: rotate(-1deg);
+            transition: all 0.3s;
+        }
+        .boxes:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .boxes h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid rgba(242, 233, 228);
+            padding-left: 1rem;
+        }
+        .boxes h3 em {
+            font-style: italic;
+            font-weight: 800;
+        }
+        .boxes p {
+            font-family: 'Poppins';
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .boxes code {
+            display: block;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+            color: rgba(60, 60, 80);
+            line-height: 1.6;
+            /* box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3); */
+        }
+        .output-box {
+            display: block;
+            background-color: rgba(100, 120, 100, 0.3);
+            border-left: 4px solid rgba(150, 200, 150, 0.8);
+            /* background-color: rgba(74, 78, 105,0.3);
+            border-left: 4px solid rgba(74, 78, 105); */
+            border-radius: 8px;
+            padding: 1.2rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            margin: 0.5rem 0 1rem 0;
+            color: rgba(242, 233, 228);
+            line-height: 1.5;
+        }
+        .output-label {
+            font-family: 'Poppins';
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(242, 233, 228);
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+        .boxes ul {
+            margin-left: 2rem;
+            line-height: 1.8;
+        }
+        .boxes ul li {
+            margin-bottom: 0.5rem;
+        }
+        .summary-table {
+            max-width: 900px;
+            margin: 3rem auto;
+            background-color: rgba(201, 173, 167);
+            border-radius: 15px;
+            padding: 2rem;
+            transform: rotate(1deg);
+            transition: all 0.3s;
+        }
+        .summary-table:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .summary-table table {
+            width: 100%;
+            border-collapse: collapse;
+            color: rgba(242, 233, 228);
+        }
+        .summary-table th,
+        .summary-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(242, 233, 228, 0.3);
+        }
+        .summary-table th {
+            font-family: "Playfair Display", serif;
+            font-size: 1.3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .quote {
+            position: relative;
+            color: rgba(154, 140, 152);
+            font-size: 1.2rem;
+            margin: 6rem auto;
+            padding: 4rem 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            word-spacing: 2px;
+            max-width: 800px;
+        }
+        .quote em {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* Rotation khusus desktop */
+        @media screen and (min-width: 769px) {
+            .boxes {
+                transform: rotate(-1deg);
+            }
+            .boxes:hover {
+                transform: rotate(0deg) scale(1.02);
+            }
+            
+            .summary-table {
+                transform: rotate(1deg);
+            }
+            .summary-table:hover {
+                transform: rotate(0deg) scale(1.02);
+            }
+            
+            .chapter-title {
+                transform: rotate(-1deg);
+            }
+            .chapter-title:hover {
+                transform: rotate(0deg) scale(1.03);
+            }
+        }
+        
+        @media print {
+        body {
+            background: white;
+        }
+        nav {
+            display: none;
+        }
+        header {
+            min-height: auto;
+            padding-bottom: 2rem;
+            page-break-after: always;
+        }
+        header::after {
+            opacity: 0.1;
+        }
+        .boxes, .summary-table {
+            transform: none !important;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            margin: 1.5rem auto;
+            padding: 2rem;
+        }
+        .chapter-title {
+            transform: none !important;
+            page-break-after: avoid;
+            margin: 2rem 0 1rem 0;
+        }
+        .quote {
+            page-break-before: always;
+            margin: 2rem auto;
+        }
+        /* Pastikan box + output ga kepisah awokaowk */
+        .boxes code {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .output-box {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        /* Cegah orphan dan widow (bjir) */
+        p, h3 {
+            orphans: 3;
+            widows: 3;
+        }
+        /* Chapter title stick dengan kontenny */
+        .chapter-title + .boxes {
+            page-break-before: avoid;
+        }
+    }
+        @media screen and (max-width: 768px) {
+        .title {
+            letter-spacing: -0.3rem;
+        }
+        .boxes {
+            padding: 2rem 1.5rem;
+            margin: 2rem 0.3rem;
+            width: calc(100vw - 0.8rem);
+            max-width: 100%;
+            min-width: 0;
+        }
+        .boxes h3 {
+            font-size: 1.8rem;
+            word-wrap: break-word;
+        }
+        .boxes p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        }
+        
+        .boxes ul {
+            font-size: 0.9rem;
+        }
+        
+        .boxes ul li {
+            line-height: 1.6;
+        }
+        
+        .output-label {
+            font-size: 0.85rem;
+        }
+        .boxes code {
+            font-size: 0.8rem;
+            padding: 1rem;
+            overflow-x: auto;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .output-box {
+            font-size: 0.8rem;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .chapter-title {
+            font-size: 2.5rem;
+            padding: 0 1rem;
+        }
+        .content-section {
+            padding: 0 0.7rem;
+        }
+        .summary-table {
+            margin: 2rem 0.5rem;
+            width: calc(100vw - 1rem);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .boxes, .summary-table, .chapter-title {
+            transform: none !important;
+        }
+        .boxes:hover, .summary-table:hover, .chapter-title:hover {
+            transform: scale(1.02) !important;
+        }
+    }
+
+    /* Disable rotasi untuk mobile
+        @media screen and (max-width: 768px) {
+            .boxes, .summary-table, .chapter-title {
+                transform: none !important;
+            }
+            .boxes:hover, .summary-table:hover, .chapter-title:hover {
+                transform: scale(1.02) !important;
+            }
+        } */
+
+        @media screen and (max-width: 480px) {
+            nav {
+                gap: 0.5rem;
+            }
+            nav a:hover, nav button:hover {
+                transform: scale(1.1);
+            }
+            .boxes code, .output-box {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            background-color: rgba(154, 140, 152, 0.2);
+            border-radius: 15px;
+            padding: 3rem;
+            min-height: 400px;
+        }
+        
+        .quiz-header {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: rgba(74, 78, 105);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-progress {
+            font-family: 'Poppins';
+            font-size: 1.1rem;
+            color: rgba(74, 78, 105);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .question-box {
+            background-color: rgba(201, 173, 167);
+            color: rgb(247, 241, 238);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .question-text {
+            font-family: 'Poppins';
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .option-btn {
+            font-family: 'Poppins';
+            font-size: 1.1rem;
+            padding: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: rgb(247, 241, 238);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .option-btn:hover:not(:disabled) {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(10px);
+        }
+        
+        .option-btn.correct {
+            background-color: rgba(100, 200, 100, 0.4);
+            border-color: rgba(150, 255, 150, 0.8);
+        }
+        
+        .option-btn.wrong {
+            background-color: rgba(200, 100, 100, 0.4);
+            border-color: rgba(255, 150, 150, 0.8);
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+        
+        .explanation {
+            background-color: rgba(100, 120, 100, 0.3);
+            border-left: 4px solid rgba(150, 200, 150, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: 'Poppins';
+            line-height: 1.6;
+        }
+        
+        .explanation h4 {
+            font-family: "Playfair Display", serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: rgba(242, 233, 228);
+        }
+        
+        .next-btn {
+            font-family: 'Poppins';
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            background-color: rgba(74, 78, 105);
+            color: rgba(242, 233, 228);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .next-btn:hover {
+            background-color: rgba(100, 104, 135);
+            transform: scale(1.05);
+        }
+        
+        .quiz-result {
+            text-align: center;
+            font-family: 'Poppins';
+        }
+        
+        .quiz-result h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: rgba(74, 78, 105);
+            margin-bottom: 1.5rem;
+        }
+        
+        .score-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(201, 173, 167);
+            margin: 2rem 0;
+        }
+        
+        .retry-btn {
+            font-family: 'Poppins';
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+            background-color: rgba(201, 173, 167);
+            color: rgb(247, 241, 238);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .retry-btn:hover {
+            background-color: rgba(221, 193, 187);
+            transform: scale(1.05);
+        }
+
+        /* Quiz Responsive untuk Mobile */
+        @media screen and (max-width: 768px) {
+            .quiz-container {
+                padding: 1.5rem 1rem;
+                margin: 2rem 0.5rem;
+                width: calc(100vw - 1rem);
+                max-width: 100%;
+            }
+            
+            .quiz-header {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-progress {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .question-box {
+                padding: 1.5rem 1.2rem;
+                width: 100%;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+                line-height: 1.5;
+            }
+            
+            .option-btn {
+                font-size: 0.95rem;
+                padding: 1rem;
+                width: 100%;
+            }
+            
+            .option-btn:hover:not(:disabled) {
+                transform: translateX(5px);
+            }
+            
+            .explanation {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
+            
+            .explanation h4 {
+                font-size: 1.1rem;
+            }
+            
+            .next-btn {
+                font-size: 1rem;
+                padding: 0.9rem 2rem;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .quiz-result h3 {
+                font-size: 2rem;
+            }
+            
+            .score-display {
+                font-size: 2.5rem;
+            }
+            
+            .retry-btn {
+                font-size: 1.1rem;
+                padding: 1rem 2.5rem;
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .quiz-container {
+                padding: 1rem 0.8rem;
+                margin: 1.5rem 0.3rem;
+            }
+            
+            .question-text {
+                font-size: 0.9rem;
+            }
+            
+            .option-btn {
+                font-size: 0.85rem;
+                padding: 0.9rem;
+            }
+            
+            .explanation {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#top"><em>to</em>p</a>
+        <a href="#html"><em>ht</em>ml</a>
+        <a href="#cpp"><em>C</em>++</a>
+        <a href="#quiz"><em>qu</em>iz</a>
+        <button onclick="exportToPDF()"><em>ex</em>port<em>PDF</em></button>
+        
+    </nav>
+
+    <header id="top">
+        <div class="title2">
+            Rangkuman TIK
+        </div>
+        <div class="title">
+            
+            Welcome!
+        </div>
+        <div class="subtitle">
+            /<em>he</em>llo/<br>
+            
+        </div>
+
+        <div class="subtitle2">
+            For better experience use <em>laptop/PC</em> :3<br>
+            Kamu bisa <em>export</em> halaman ini ke PDF lewat tombol paling atas ^_^<br>
+            Maaf jika penjelasannya kurang sederhana atau ada tampilan yang kurang rapi ygy <br><br>
+            -<strong><em>William</em></strong>-
+        </div>
+    </header>
+
+    <div class="content-section" >
+        <div id="html">
+            <br>
+        </div>
+        <div class="chapter-title">
+            <em>Bab</em> 1: HTML
+        </div>
+
+        <div class="boxes">
+            <h3><em>1.</em> Struktur Dasar HTML</h3>
+            
+            <p>Struktur dasar HTML selalu dimulai dengan <strong>&lt;!DOCTYPE html&gt;</strong> yang memberitahu browser bahwa ini adalah dokumen HTML5.<br> Kemudian ada <strong>&lt;html&gt;</strong> sebagai wadah utama,<br> <strong>&lt;head&gt;</strong> untuk informasi meta (tidak terlihat di halaman), dan<br> <strong>&lt;body&gt;</strong> untuk konten yang terlihat.</p>
+            <code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Halaman Pertamaku&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Selamat Datang!&lt;/h1&gt;
+  &lt;p&gt;Ini adalah paragraf pertama.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box">[ Judul Tab: Halaman Pertamaku ]
+
+<strong>Selamat Datang!</strong>
+Ini adalah paragraf pertama.</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>2.</em> Format Teks dan Heading</h3>
+            <p>Heading adalah judul atau subjudul dalam halaman web. HTML menyediakan 6 level heading dari <strong>h1</strong> (paling besar dan penting) sampai <strong>h6</strong> (paling kecil). Gunakan h1 untuk judul utama halaman, h2 untuk subjudul, dan seterusnya sesuai hierarki.</p>
+            <p>Tag <strong>&lt;strong&gt;</strong> membuat teks tebal (bold), sementara <strong>&lt;em&gt;</strong> membuat teks miring (italic).</p>
+            <code>&lt;h1&gt;Heading Level 1 - Judul Utama&lt;/h1&gt;
+&lt;h2&gt;Heading Level 2 - Subjudul&lt;/h2&gt;
+&lt;h3&gt;Heading Level 3 - Sub-subjudul&lt;/h3&gt;
+&lt;p&gt;Paragraf biasa dengan teks.&lt;/p&gt;
+&lt;p&gt;Ini teks &lt;strong&gt;tebal&lt;/strong&gt; dan ini &lt;em&gt;miring&lt;/em&gt;.&lt;/p&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box"><strong style="font-size: 2em;">Heading Level 1 - Judul Utama</strong>
+<strong style="font-size: 1.5em;">Heading Level 2 - Subjudul</strong>
+<strong style="font-size: 1.2em;">Heading Level 3 - Sub-subjudul</strong>
+Paragraf biasa dengan teks.
+Ini teks <strong>tebal</strong> dan ini <em>miring</em>.</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>3.</em> Hyperlink - Membuat Tautan</h3>
+            <p>Hyperlink atau link adalah elemen yang membuat web menjadi "web" - menghubungkan satu halaman ke halaman lain.<br> Tag <strong>&lt;a&gt;</strong> (anchor) digunakan dengan atribut <strong>href</strong> (hypertext reference) yang menentukan tujuan link.</p>
+            <p>Atribut <strong>target="_blank"</strong> membuat link terbuka di tab baru. Untuk link ke bagian dalam halaman yang sama, gunakan <strong>href="#namaID"</strong> yang akan melompat ke elemen dengan id tersebut.</p>
+            <code>&lt;!-- Link ke website eksternal --&gt;
+&lt;a href="https://google.com"&gt;Pergi ke Google&lt;/a&gt;
+
+&lt;!-- Link ke halaman lokal --&gt;
+&lt;a href="about.html"&gt;Tentang Kami&lt;/a&gt;
+
+&lt;!-- Link ke bagian halaman (anchor) --&gt;
+&lt;a href="#section1"&gt;Ke Bagian 1&lt;/a&gt;
+
+&lt;!-- Link yang membuka di tab baru --&gt;
+&lt;a href="https://github.com" target="_blank"&gt;GitHub&lt;/a&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box"><u style="color: #4a9eff; cursor: pointer;">Pergi ke Google</u>
+<u style="color: #4a9eff; cursor: pointer;">Tentang Kami</u>
+<u style="color: #4a9eff; cursor: pointer;">Ke Bagian 1</u>
+<u style="color: #4a9eff; cursor: pointer;">GitHub</u> (terbuka di tab baru)</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>4.</em> Menambahkan Gambar</h3>
+            <p>Tag <strong>&lt;img&gt;</strong> digunakan untuk menampilkan gambar di halaman web. Atribut <strong>src</strong> (source) menentukan lokasi file gambar - bisa dari komputer kita atau dari internet (URL).</p>
+            <p>Atribut <strong>alt</strong> (alternative text) adalah teks yang muncul jika gambar gagal dimuat. <br>Atribut <strong>width</strong> dan <strong>height</strong> mengatur ukuran gambar dalam pixel.</p>
+            <code>&lt;!-- Gambar dari file lokal --&gt;
+&lt;img src="foto.jpg" alt="Foto pemandangan" width="300"&gt;
+
+&lt;!-- Gambar dari URL internet --&gt;
+&lt;img src="https://example.com/image.png" 
+     alt="Gambar contoh" 
+     width="400" 
+     height="300"&gt;
+
+&lt;!-- Gambar yang bisa diklik (dengan link) --&gt;
+&lt;a href="https://example.com"&gt;
+  &lt;img src="logo.png" alt="Logo perusahaan"&gt;
+&lt;/a&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box">[Gambar pemandangan ditampilkan dengan lebar 300px]
+[Gambar dari internet ditampilkan 400x300px]
+[Logo yang bisa diklik untuk ke example.com]</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>5.</em> List - Membuat Daftar</h3>
+            <p>List atau daftar digunakan untuk mengelompokkan item-item yang berhubungan. HTML menyediakan 3 jenis list dengan fungsi berbeda:</p>
+            <p><strong>• Unordered List (&lt;ul&gt;)</strong> - Daftar tanpa urutan spesifik, ditandai dengan bullet point (•).</p>
+            <p><strong>• Ordered List (&lt;ol&gt;)</strong> - Daftar berurutan dengan nomor otomatis (1, 2, 3...).</p>
+            <p><strong>• Description List (&lt;dl&gt;)</strong> - Daftar istilah dan penjelasannya, seperti kamus mini. Menggunakan <strong>&lt;dt&gt;</strong> (definition term) untuk istilah dan <strong>&lt;dd&gt;</strong> (definition description) untuk penjelasannya.</p>
+            <p><strong>• List Item (&lt;li&gt;)</strong> - Ini adalah item individual dalam ul atau ol. Setiap baris/poin dalam daftar harus dibungkus dengan tag &lt;li&gt;.</p>
+            <code><b>&lt;!-- Unordered List: Daftar Hobi --&gt;</b>
+&lt;ul&gt;
+  &lt;li&gt;Membaca buku&lt;/li&gt;
+  &lt;li&gt;Mendengarkan musik&lt;/li&gt;
+  &lt;li&gt;Bermain game&lt;/li&gt;
+&lt;/ul&gt;
+
+<b>&lt;!-- Ordered List: Cara Membuat Kopi --&gt;</b>
+&lt;ol&gt;
+  &lt;li&gt;Panaskan air hingga mendidih&lt;/li&gt;
+  &lt;li&gt;Masukkan 2 sendok kopi bubuk ke cangkir&lt;/li&gt;
+  &lt;li&gt;Tuang air panas ke dalam cangkir&lt;/li&gt;
+  &lt;li&gt;Aduk hingga rata dan sajikan&lt;/li&gt;
+&lt;/ol&gt;
+
+<b>&lt;!-- Description List: Kamus Singkat --&gt;</b>
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Bahasa markup untuk membuat struktur website&lt;/dd&gt;
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Bahasa untuk mempercantik tampilan website&lt;/dd&gt;
+&lt;/dl&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box">• Membaca buku
+• Mendengarkan musik
+• Bermain game
+
+1. Panaskan air hingga mendidih
+2. Masukkan 2 sendok kopi bubuk ke cangkir
+3. Tuang air panas ke dalam cangkir
+4. Aduk hingga rata dan sajikan
+
+<strong>HTML</strong>
+    Bahasa markup untuk membuat struktur website
+<strong>CSS</strong>
+    Bahasa untuk mempercantik tampilan website</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>6.</em> Tabel - Menampilkan Data Terstruktur</h3>
+            <p>Mirip kayak spreadsheet Excel. Tabel terdiri dari beberapa elemen:</p>
+            <p><strong>• &lt;table&gt;</strong> - Wadah utama untuk seluruh tabel</p>
+            <p><strong>• &lt;tr&gt;</strong> (table row) - Mendefinisikan satu baris horizontal dalam tabel</p>
+            <p><strong>• &lt;th&gt;</strong> (table header) - Sel header/judul kolom, biasanya ditampilkan tebal dan di tengah</p>
+            <p><strong>• &lt;td&gt;</strong> (table data) - Sel berisi data/isi tabel</p>
+            <p><strong>• colspan="angka"</strong> - Menggabungkan sel secara HORIZONTAL (ke samping). Misalnya colspan="2" artinya sel ini mengambil ruang 2 kolom sekaligus. Berguna untuk membuat header yang merentang beberapa kolom.</p>
+            <p><strong>• rowspan="angka"</strong> - Menggabungkan sel secara VERTIKAL (ke bawah). Misalnya rowspan="3" artinya sel ini mengambil ruang 3 baris sekaligus. Berguna untuk data yang sama di beberapa baris.</p>
+            <code>&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Nama&lt;/th&gt;
+    &lt;th&gt;Kelas&lt;/th&gt;
+    &lt;th&gt;Nilai&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Andi&lt;/td&gt;
+    &lt;td&gt;XI-IPA 2&lt;/td&gt;
+    &lt;td&gt;90&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Budi&lt;/td&gt;
+    &lt;td&gt;XI-IPA 1&lt;/td&gt;
+    &lt;td&gt;85&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;!-- colspan="2" membuat sel ini memakan 2 kolom --&gt;
+    &lt;td colspan="2"&gt;Rata-rata Kelas&lt;/td&gt;
+    &lt;td&gt;87.5&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;!-- Contoh dengan rowspan --&gt;
+&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Hari&lt;/th&gt;
+    &lt;th&gt;Mata Pelajaran&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;!-- rowspan="2" membuat sel ini memakan 2 baris --&gt;
+    &lt;td rowspan="2"&gt;Senin&lt;/td&gt;
+    &lt;td&gt;Matematika&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Fisika&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box">┌─────────┬──────────┬───────┐
+│ Nama    │ Kelas    │ Nilai │
+├─────────┼──────────┼───────┤
+│ Andi    │ XI-IPA 2 │ 90    │
+│ Budi    │ XI-IPA 1 │ 85    │
+│ Rata-rata Kelas    │ 87.5  │
+└────────────────────┴───────┘
+
+┌───────┬────────────────┐
+│ Hari  │ Mata Pelajaran │
+├───────┼────────────────┤
+│ Senin │ Matematika     │
+│       ├────────────────┤
+│       │ Fisika         │
+└───────┴────────────────┘</div>
+        </div>
+
+        <div class="boxes">
+    <h3><em>7.</em> Formulir - Mengumpulkan Input User</h3>
+    <p>Form adalah cara website mengumpulkan informasi dari pengguna. Form bisa berupa pendaftaran akun, login, survey, atau form kontak. Tag <strong>&lt;form&gt;</strong> adalah wadah untuk semua elemen input.</p>
+    <p>Atribut <strong>action</strong> menentukan ke mana data akan dikirim (biasanya file PHP atau URL), dan <strong>method</strong> menentukan cara pengiriman (POST untuk data sensitif, GET untuk data biasa).</p>
+    <p>Elemen penting dalam form: <br><strong>&lt;select&gt;</strong> untuk dropdown pilihan, <br><strong>&lt;option&gt;</strong> untuk item dalam dropdown, <br><strong>type="text"</strong> untuk input teks, <br><strong>type="password"</strong> untuk password (tersembunyi), <br><strong>type="date"</strong> untuk tanggal, <br><strong>type="radio"</strong> untuk pilihan tunggal, <br><strong>type="checkbox"</strong> untuk pilihan multiple, <br><strong>type="submit"</strong> untuk tombol kirim, dan <br><strong>type="reset"</strong> untuk tombol reset form.
+    <br><br> Contohnya di bawah ini (sori agak panjang tapi mmg gitu dicontoh bu liske)</p>
+    <code>&lt;form id="form1" name="form1" action="Latihan1.html" method=""&gt;
+  &lt;table align="center" border="0"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No Peserta&lt;/td&gt;
+      &lt;td&gt;
+        &lt;select class="huruf"&gt;
+          &lt;option value="-"&gt;Silahkan Pilih No Peserta&lt;/option&gt;
+          &lt;option value="1"&gt;1&lt;/option&gt;
+          &lt;option value="2"&gt;2&lt;/option&gt;
+          &lt;option value="3"&gt;3&lt;/option&gt;
+          &lt;option value="4"&gt;4&lt;/option&gt;
+          &lt;option value="5"&gt;5&lt;/option&gt;
+          &lt;option value="6"&gt;6&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Nama Lengkap&lt;/td&gt;
+      &lt;td&gt;&lt;input type="text" name="" size="35" maxlength="20" class="huruf"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Password&lt;/td&gt;
+      &lt;td&gt;&lt;input type="password" name="" class="huruf"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tempat Lahir&lt;/td&gt;
+      &lt;td&gt;&lt;input type="text" name="" class="huruf"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tanggal Lahir&lt;/td&gt;
+      &lt;td&gt;&lt;input type="date" name="" class="huruf"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Jenis Kelamin&lt;/td&gt;
+      &lt;td&gt;
+        &lt;input type="radio" name="jenkel" value="1"&gt;Pria&lt;br&gt;
+        &lt;input type="radio" name="jenkel" value="2"&gt;Wanita
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pendidikan&lt;/td&gt;
+      &lt;td&gt;
+        &lt;input type="checkbox" name="pendidikan" value="1"&gt;SD&lt;br&gt;
+        &lt;input type="checkbox" name="pendidikan" value="2"&gt;SMP&lt;br&gt;
+        &lt;input type="checkbox" name="pendidikan" value="3"&gt;SMA&lt;br&gt;
+        &lt;input type="checkbox" name="pendidikan" value="4"&gt;D-3
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Agama&lt;/td&gt;
+      &lt;td&gt;
+        &lt;input type="radio" name="Agama" value="1"&gt;Kristen&lt;br&gt;
+        &lt;input type="radio" name="Agama" value="2"&gt;Islam&lt;br&gt;
+        &lt;input type="radio" name="Agama" value="3"&gt;Buddha&lt;br&gt;
+        &lt;input type="radio" name="Agama" value="4"&gt;Hindu
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;input type="submit" name="submit" value="submit" class="huruf"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;input type="reset" name="reset" value="reset" class="huruf"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/form&gt;</code>
+    <div class="output-label">Output di Browser:</div>
+    <div class="output-box">No Peserta: [Dropdown: Silahkan Pilih No Peserta ▼]
+Nama Lengkap: [_____________________________]
+Password: [•••••••]
+Tempat Lahir: [______________]
+Tanggal Lahir: [📅 dd/mm/yyyy]
+Jenis Kelamin: ◯ Pria
+               ◯ Wanita
+Pendidikan: ☐ SD
+            ☐ SMP
+            ☐ SMA
+            ☐ D-3
+Agama: ◯ Kristen
+       ◯ Islam
+       ◯ Buddha
+       ◯ Hindu
+[ submit ]  [ reset ]</div>
+</div>
+
+<div class="boxes">
+    <h3><em>7.5.</em> Atribut Penting dalam HTML</h3>
+    <p>Atribut adalah informasi tambahan yang diberikan pada tag HTML untuk mengatur perilaku atau tampilan elemen. Format penulisan: <strong>&lt;tag atribut="nilai"&gt;</strong></p>
+    
+    <p><strong>Atribut &lt;body&gt;:</strong></p>
+    <p><strong>• bgcolor</strong> - Mengatur warna background halaman<br>
+    <strong>• text</strong> - Mengatur warna teks default<br>
+    <strong>• background</strong> - Mengatur gambar background<br>
+    <strong>• link/vlink/alink</strong> - Warna link (normal/sudah dikunjungi/aktif)</p>
+    
+    <p><strong>Atribut &lt;p&gt; (paragraf):</strong></p>
+    <p><strong>• align</strong> - Rata teks (left/center/right/justify)<br>
+    <strong>• style</strong> - CSS inline untuk styling</p>
+    
+    <p><strong>Atribut &lt;form&gt;:</strong></p>
+    <p><strong>• action</strong> - URL tujuan pengiriman data<br>
+    <strong>• method</strong> - Cara kirim data (GET/POST)<br>
+    <strong>• name</strong> - Nama form untuk identifikasi<br>
+    <strong>• target</strong> - Di mana hasil form dibuka (_blank/_self)</p>
+    
+    <p><strong>Atribut List (&lt;ul&gt;, &lt;ol&gt;):</strong></p>
+    <p><strong>• type</strong> - Jenis penanda list<br>
+    &nbsp;&nbsp;- Untuk &lt;ul&gt;: disc (•) / circle (○) / square (■)<br>
+    &nbsp;&nbsp;- Untuk &lt;ol&gt;: 1 (angka) / A (huruf besar) / a (huruf kecil) / I (romawi besar) / i (romawi kecil)<br>
+    <strong>• start</strong> - Nomor awal untuk &lt;ol&gt;</p>
+    
+    <p><strong>Atribut &lt;table&gt;:</strong></p>
+    <p><strong>• border</strong> - Ketebalan garis tepi (dalam pixel)<br>
+    <strong>• cellpadding</strong> - Jarak antara isi sel dengan border sel<br>
+    <strong>• cellspacing</strong> - Jarak antar sel<br>
+    <strong>• width/height</strong> - Lebar/tinggi tabel (px atau %)<br>
+    <strong>• align</strong> - Posisi tabel (left/center/right)<br>
+    <strong>• bgcolor</strong> - Warna background tabel</p>
+    
+    
+    
+</div>
+
+        <div class="boxes">
+            <h3><em>8.</em> Pengenalan CSS - Styling Website</h3>
+            <p>CSS (Cascading Style Sheets) adalah bahasa untuk mempercantik tampilan website. Jika HTML adalah kerangka/tulang, maka CSS adalah kulit dan pakaiannya. CSS mengatur hampir semua aspek visual website.</p>
+            <p>Ada 3 cara menulis CSS: <strong>Inline CSS</strong> (langsung di tag HTML dengan atribut style), <strong>Internal CSS</strong> (di dalam tag &lt;style&gt; di bagian &lt;head&gt;), dan <strong>External CSS</strong> (file .css terpisah). Internal CSS yang paling sering digunakan untuk belajar.</p>
+            <p>CSS bekerja dengan <strong>selector</strong> (memilih elemen mana yang mau di-style) dan <strong>property</strong> (apa yang mau diubah). Format dasarnya: <strong>selector { property: value; }</strong></p>
+            <code>&lt;style&gt;
+    <b>/* Class selector - bisa dipakai berkali-kali */</b>
+    .gaya1 {
+      font-size: 68pt;
+      font-family: 'helvetica';
+      color: aliceblue;
+      background-color: green;
+      border-style: double;
+      border-color: darkred;
+      border-radius: 20px;
+      text-align: center;
+    }
+    
+    .gaya2 {
+      font-size: 24pt;
+      font-family: 'montserrat';
+      text-align: justify;
+      border-style: dashed;
+      padding: 40px;
+      margin: 200px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  <b>&lt;!-- Menggunakan class CSS --&gt;</b>
+  &lt;p class="gaya1"&gt;HALAMAN UTAMA WEBSITE&lt;/p&gt;
+  
+  <b>&lt;!-- Inline CSS - langsung di tag --&gt;</b>
+  &lt;h1 style="color:tomato;"&gt;Heading 1&lt;/h1&gt;
+  
+  &lt;div class="gaya2"&gt;
+    WILLIAM
+  &lt;/div&gt;
+&lt;/body&gt;</code>
+            <div class="output-label">Output di Browser:</div>
+            <div class="output-box">[Background: gambar Study.gif memenuhi layar]
+
+┌────────────────────────────────────┐
+│ HALAMAN UTAMA WEBSITE              │ (font besar 68pt, hijau, border merah ganda, sudut melengkung)
+└────────────────────────────────────┘
+
+<strong style="color: tomato; font-size: 1.5em;">Heading 1</strong> (warna tomato)
+
+┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
+   WILLIAM                            (font 24pt, border dashed, padding 40px)
+└ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>9.</em> Property CSS Penting</h3>
+            <p>CSS punya ratusan property, tapi ada beberapa yang paling sering dipakai dan wajib dikuasai:</p>
+            <p><strong>• Font & Text:</strong> <strong>font-size</strong> (ukuran teks), <strong>font-family</strong> (jenis font), <strong>color</strong> (warna teks), <strong>text-align</strong> (rata kiri/tengah/kanan/justify)</p>
+            <p><strong>• Background:</strong> <strong>background-color</strong> (warna latar), <strong>background</strong> (bisa untuk gambar, posisi, ukuran sekaligus). Format: url('namafile') no-repeat center center/cover</p>
+            <p><strong>• Border:</strong> <strong>border-style</strong> (solid/dashed/dotted/double), <strong>border-color</strong> (warna border), <strong>border-radius</strong> (sudut melengkung dalam px)</p>
+            <p><strong>• Spacing:</strong> <strong>padding</strong> (jarak dalam/dari border ke konten), <strong>margin</strong> (jarak luar/dari border ke elemen lain)</p>
+            <code><b>/* Contoh Kombinasi Property CSS */</b>
+
+<b>/* Selector Class - pakai titik (.) */</b>
+.kotak-merah {
+  width: 300px;
+  height: 200px;
+  background-color: red;
+  color: white;
+  font-size: 20pt;
+  font-family: 'Arial';
+  text-align: center;
+  
+  <b>/* Border */</b>
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+  border-radius: 15px;
+  
+  <b>/* Spacing */</b>
+  padding: 20px;      <b>/* Jarak DALAM */</b>
+  margin: 50px;       <b>/* Jarak LUAR */</b>
+}
+
+<b>/* Selector Tag - langsung nama tag */</b>
+body {
+  display: flex;
+  flex-direction: column;    <b>/* Susun vertikal */</b>
+  align-items: center;       <b>/* Rata tengah horizontal */</b>
+  justify-content: center;   <b>/* Rata tengah vertikal */</b>
+}
+
+<b>/* Inline CSS di HTML */</b>
+&lt;h1 style="color: blue; font-size: 36pt;"&gt;Judul&lt;/h1&gt;</code>
+            <div class="output-label">Perbedaan Padding vs Margin:</div>
+            <div class="output-box">┌──────────────────────────────┐
+│  ← MARGIN (jarak luar) →     │
+│  ┌────────────────────────┐  │
+│  │ ← PADDING (jarak dalam)│  │
+│  │  ┌──────────────────┐  │  │
+│  │  │   KONTEN TEXT    │  │  │
+│  │  └──────────────────┘  │  │
+│  │         ↑ PADDING      │  │
+│  └────────────────────────┘  │
+│           ↑ MARGIN           │
+└──────────────────────────────┘
+
+Padding = ruang DALAM border
+Margin = ruang LUAR border</div>
+        </div>
+
+        <div class="summary-table">
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Materi</th>
+                    <th>Fokus Utama</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Struktur Dasar</td>
+                    <td>Tag html, head, body, DOCTYPE</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Format Teks</td>
+                    <td>Heading h1-h6, strong, em</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Hyperlink</td>
+                    <td>Tag &lt;a&gt;, href, target</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Gambar</td>
+                    <td>Tag &lt;img&gt;, src, alt, width</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>List</td>
+                    <td>ol, ul, dl, li, dt, dd</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Tabel</td>
+                    <td>table, tr, th, td, colspan, rowspan</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Form</td>
+                    <td>form, input, label, checkbox, radio</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>CSS Dasar</td>
+                    <td>Selector, property, inline/internal CSS</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>CSS Property</td>
+                    <td>Font, background, border, padding, margin, flexbox</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="content-section" >
+        <div id="cpp">
+            <p></p> <br>
+        </div>
+        <div class="chapter-title">
+            <em>Bab</em> 2: C++
+        </div>
+
+        <div class="boxes">
+            <h3><em>1.</em> Struktur Dasar C++</h3>
+            <p>Setiap program C++ harus punya fungsi <strong>main()</strong> sebagai titik mulai eksekusi program.</p>
+            <p><strong>#include &lt;iostream&gt;</strong> berfungsi untuk memasukkan library input-output standar. <br><strong>using namespace std;</strong> memungkinkan kita menggunakan cout dan cin tanpa menulis std:: di depannya. <br><strong>return 0;</strong> memberitahu sistem operasi bahwa program berjalan sukses tanpa error.</p>
+            <code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+    cout &lt;&lt; "Selamat datang di C++!" &lt;&lt; endl;
+    return 0;
+}</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">Hello, World!
+Selamat datang di C++!</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>2.</em> Input dan Output</h3>
+            <p>Input dan output adalah cara program berkomunikasi dengan user. <strong>cout</strong> (console output) digunakan untuk menampilkan data ke layar, sementara <strong>cin</strong> (console input) digunakan untuk membaca input dari keyboard.</p>
+            <p>Operator <strong>&lt;&lt;</strong> (insertion operator) "memasukkan" data ke cout untuk ditampilkan. Operator <strong>&gt;&gt;</strong> (extraction operator) "mengekstrak" data dari cin ke variabel. <strong>endl</strong> adalah end line yang membuat baris baru (seperti menekan Enter).</p>
+            <code>
+    <b>// Output - Menampilkan pesan</b>
+    cout &lt;&lt; "Masukkan nama Anda: ";
+    
+    <b>// Input - Membaca input nama</b>
+    cin &gt;&gt; nama;
+    
+    cout &lt;&lt; "Masukkan umur Anda: ";
+    cin &gt;&gt; umur;
+    
+    <b>// Output hasil dengan menggabungkan teks dan variabel</b>
+    cout &lt;&lt; "Halo " &lt;&lt; nama &lt;&lt; ", umur kamu " &lt;&lt; umur &lt;&lt; " tahun" &lt;&lt; endl;
+    cout &lt;&lt; "Selamat belajar C++!" &lt;&lt; endl;
+    
+</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">Masukkan nama Anda: Budi
+Masukkan umur Anda: 17
+Halo Budi, umur kamu 17 tahun
+Selamat belajar C++!</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>3.</em> Tipe Data dan Variabel</h3>
+            <p>Variabel adalah wadah untuk menyimpan data. Setiap variabel punya tipe data yang menentukan jenis nilai apa yang bisa disimpan dan berapa banyak memori yang digunakan.</p>
+            <p><strong>int</strong> untuk bilangan bulat (tidak ada koma), <br><strong>float</strong> untuk bilangan desimal presisi tunggal, <br><strong>double</strong> untuk desimal presisi ganda (lebih akurat), <br><strong>char</strong> untuk satu karakter (harus pakai petik tunggal), <br><strong>string</strong> untuk teks/kumpulan karakter, dan <br><strong>bool</strong> untuk nilai benar/salah (true/false).</p>
+            <code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Deklarasi dan inisialisasi variabel
+    int angka = 10;              <b>// Bilangan bulat</b>
+    float desimal = 3.14;        <b>// Bilangan desimal</b>
+    double presisi = 3.14159265; <b>// Desimal presisi tinggi</b>
+    char huruf = 'A';            <b>// Karakter tunggal</b>
+    string teks = "Hello";       <b>// Kumpulan karakter</b>
+    bool benar = true;           <b>// Boolean true atau false</b>
+    
+    // Menampilkan semua variabel
+    cout &lt;&lt; "Integer: " &lt;&lt; angka &lt;&lt; endl;
+    cout &lt;&lt; "Float: " &lt;&lt; desimal &lt;&lt; endl;
+    cout &lt;&lt; "Double: " &lt;&lt; presisi &lt;&lt; endl;
+    cout &lt;&lt; "Char: " &lt;&lt; huruf &lt;&lt; endl;
+    cout &lt;&lt; "String: " &lt;&lt; teks &lt;&lt; endl;
+    cout &lt;&lt; "Bool: " &lt;&lt; benar &lt;&lt; endl;
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">Integer: 10
+Float: 3.14
+Double: 3.14159265
+Char: A
+String: Hello
+Bool: 1</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>4.</em> Percabangan IF-ELSE</h3>
+            <p>Percabangan adalah kemampuan program untuk membuat keputusan. IF-ELSE memungkinkan program menjalankan kode berbeda berdasarkan kondisi tertentu - seperti "jika nilai lebih dari 80, tampilkan A, jika tidak tampilkan B".</p>
+            <p>Struktur: <strong>if (kondisi)</strong> dijalankan jika kondisi benar, <strong>else if (kondisi2)</strong> untuk kondisi alternatif, dan <strong>else</strong> dijalankan jika semua kondisi di atasnya salah. <br><br>Operator perbandingan: <br><strong>&gt;=</strong> (lebih besar sama dengan), <br><strong>&lt;=</strong> (lebih kecil sama dengan), <br><strong>==</strong> (sama dengan), <br><strong>!=</strong> (tidak sama dengan).</p>
+            <code>int main() {
+    int nilai;
+    
+    cout &lt;&lt; "Masukkan nilai ujian (0-100): ";
+    cin &gt;&gt; nilai;
+    
+    <b>// Struktur IF-ELSE untuk menentukan grade</b>
+    if (nilai &gt;= 80) {
+        cout &lt;&lt; "Grade: A - Sangat Baik!" &lt;&lt; endl;
+        cout &lt;&lt; "Pertahankan prestasimu!" &lt;&lt; endl;
+    } else if (nilai &gt;= 70) {
+        cout &lt;&lt; "Grade: B - Baik" &lt;&lt; endl;
+        cout &lt;&lt; "Tingkatkan lagi ya!" &lt;&lt; endl;
+    } else if (nilai &gt;= 60) {
+        cout &lt;&lt; "Grade: C - Cukup" &lt;&lt; endl;
+        cout &lt;&lt; "Masih bisa lebih baik!" &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "Grade: D - Kurang" &lt;&lt; endl;
+        cout &lt;&lt; "Harus lebih giat belajar!" &lt;&lt; endl;
+    }
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console (jika input 85):</div>
+            <div class="output-box">Masukkan nilai ujian (0-100): 85
+Grade: A - Sangat Baik!
+Pertahankan prestasimu!</div>
+            <div class="output-label">Output Console (jika input 65):</div>
+            <div class="output-box">Masukkan nilai ujian (0-100): 65
+Grade: C - Cukup
+Masih bisa lebih baik!</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>5.</em> Percabangan SWITCH-CASE</h3>
+            <p>SWITCH-CASE adalah alternatif IF-ELSE yang lebih rapi ketika kita punya banyak pilihan berdasarkan satu variabel. Bayangkan seperti menu restoran - pilih nomor 1, 2, atau 3 dan dapat makanan berbeda.</p>
+            <p><strong>switch (variabel)</strong> mengecek nilai variabel, <strong>case nilai:</strong> adalah pilihan yang mungkin, <strong>break;</strong> menghentikan eksekusi (keluar dari switch) setelah case dijalankan, dan <strong>default:</strong> dijalankan jika tidak ada case yang cocok (seperti else di IF-ELSE).</p>
+            <code>int main() {
+    int pilihan;
+    int a = 10, b = 5;
+    
+    cout &lt;&lt; "=== KALKULATOR SEDERHANA ===" &lt;&lt; endl;
+    cout &lt;&lt; "1. Penjumlahan" &lt;&lt; endl;
+    cout &lt;&lt; "2. Pengurangan" &lt;&lt; endl;
+    cout &lt;&lt; "3. Perkalian" &lt;&lt; endl;
+    cout &lt;&lt; "4. Pembagian" &lt;&lt; endl;
+    cout &lt;&lt; "Pilih operasi (1-4): ";
+    cin &gt;&gt; pilihan;
+    
+    <b>switch (pilihan) {
+        case 1:
+            cout &lt;&lt; "Hasil: " &lt;&lt; a &lt;&lt; " + " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a + b) &lt;&lt; endl;
+            break;
+        case 2:
+            cout &lt;&lt; "Hasil: " &lt;&lt; a &lt;&lt; " - " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a - b) &lt;&lt; endl;
+            break;
+        case 3:
+            cout &lt;&lt; "Hasil: " &lt;&lt; a &lt;&lt; " * " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a * b) &lt;&lt; endl;
+            break;
+        case 4:
+            cout &lt;&lt; "Hasil: " &lt;&lt; a &lt;&lt; " / " &lt;&lt; b &lt;&lt; " = " &lt;&lt; (a / b) &lt;&lt; endl;
+            break;
+        default:
+            cout &lt;&lt; "Pilihan tidak valid! Masukkan 1-4" &lt;&lt; endl;
+    }</b>
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console (jika pilih 3):</div>
+            <div class="output-box">=== KALKULATOR SEDERHANA ===
+1. Penjumlahan
+2. Pengurangan
+3. Perkalian
+4. Pembagian
+Pilih operasi (1-4): 3
+Hasil: 10 * 5 = 50</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>6.</em> Perulangan FOR</h3>
+            <p>Perulangan FOR adalah cara menjalankan blok kode berulang kali sejumlah tertentu. Sangat berguna ketika kita tahu pasti berapa kali harus mengulang - misalnya mencetak angka 1-10 atau membuat pola bintang.</p>
+            <p>Struktur: <strong>for (inisialisasi; kondisi; increment)</strong>. <br>Inisialisasi menentukan nilai awal (biasanya i=0 atau i=1), <br>kondisi menentukan kapan berhenti (i&lt;=10), dan <br>increment menentukan bagaimana variabel berubah setiap iterasi (i++ artinya tambah 1).</p>
+            <p>Nested loop (perulangan bersarang) adalah loop di dalam loop - seperti membuat pola bintang, loop luar untuk baris dan loop dalam untuk kolom.</p>
+            <code>int main() {
+    <b>// Perulangan sederhana - mencetak angka</b>
+    cout &lt;&lt; "Angka 1 sampai 5:" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 5; i++) {
+        cout &lt;&lt; "Perulangan ke-" &lt;&lt; i &lt;&lt; endl;
+    }
+    
+    <b>// Nested loop - membuat pola bintang segitiga</b>
+    cout &lt;&lt; "\nPola Bintang Segitiga:" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 5; i++) {
+        for (int j = 1; j &lt;= i; j++) {
+            cout &lt;&lt; "* ";
+        }
+        cout &lt;&lt; endl;
+    }
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">Angka 1 sampai 5:
+Perulangan ke-1
+Perulangan ke-2
+Perulangan ke-3
+Perulangan ke-4
+Perulangan ke-5
+
+Pola Bintang Segitiga:
+* 
+* * 
+* * * 
+* * * * 
+* * * * *</div>
+        </div>
+<div class="boxes">
+    <h3><em>6.5.</em> Nested Loop (Perulangan Bersarang)</h3>
+    <p>Nested loop adalah perulangan di dalam perulangan. Loop luar mengontrol baris, loop dalam mengontrol kolom. Konsep ini sering dipakai untuk membuat pola, matriks, atau tabel.</p>
+    
+    <p><strong>Cara Baca Nested Loop:</strong></p>
+    <p>1. Loop luar jalan 1 kali → Loop dalam jalan SAMPAI SELESAI<br>
+    2. Loop luar jalan lagi 1 kali → Loop dalam jalan lagi dari awal SAMPAI SELESAI<br>
+    3. Dan seterusnya...</p>
+    
+    <p><strong>TRIK UJIAN - Memprediksi Output Nested Loop:</strong></p>
+    <p>• <strong>Hitung iterasi loop luar</strong> = berapa kali baris akan tercetak<br>
+    • <strong>Hitung iterasi loop dalam</strong> di setiap iterasi loop luar<br>
+    • <strong>Perhatikan kondisi</strong>: apakah loop dalam bergantung pada variabel loop luar?<br>
+    • <strong>Trace manual</strong>: tulis nilai i dan j di setiap iterasi<br>
+    • <strong>Cek output statement</strong>: kapan ada endl (baris baru)?</p>
+    
+    <code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    <b>// POLA 1: Segitiga Angka</b>
+    cout &lt;&lt; "Pola Segitiga Angka:" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 4; i++) {        <b>// Loop luar: baris 1-4</b>
+        for (int j = 1; j &lt;= i; j++) {    <b>// Loop dalam: kolom 1 sampai i</b>
+            cout &lt;&lt; j &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;  <b>// Pindah baris setelah loop dalam selesai</b>
+    }
+    
+    <b>// POLA 2: Persegi Panjang Bintang</b>
+    cout &lt;&lt; "\nPola Persegi Panjang:" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 3; i++) {        <b>// 3 baris</b>
+        for (int j = 1; j &lt;= 5; j++) {    <b>// 5 kolom</b>
+            cout &lt;&lt; "* ";
+        }
+        cout &lt;&lt; endl;
+    }
+    
+    <b>// POLA 3: Tabel Perkalian</b>
+    cout &lt;&lt; "\nTabel Perkalian 2x2:" &lt;&lt; endl;
+    for (int i = 1; i &lt;= 2; i++) {
+        for (int j = 1; j &lt;= 2; j++) {
+            cout &lt;&lt; i &lt;&lt; " x " &lt;&lt; j &lt;&lt; " = " &lt;&lt; (i*j) &lt;&lt; "\t";
+        }
+        cout &lt;&lt; endl;
+    }
+    
+    <b>// POLA 4: Segitiga Terbalik</b>
+    cout &lt;&lt; "\nSegitiga Terbalik:" &lt;&lt; endl;
+    for (int i = 4; i &gt;= 1; i--) {        <b>// Mulai dari 4 turun ke 1</b>
+        for (int j = 1; j &lt;= i; j++) {
+            cout &lt;&lt; "* ";
+        }
+        cout &lt;&lt; endl;
+    }
+    
+    return 0;
+}</code>
+    <div class="output-label">Output Console:</div>
+    <div class="output-box">Pola Segitiga Angka:
+1 
+1 2 
+1 2 3 
+1 2 3 4 
+
+Pola Persegi Panjang:
+* * * * * 
+* * * * * 
+* * * * * 
+
+Tabel Perkalian 2x2:
+1 x 1 = 1    1 x 2 = 2    
+2 x 1 = 2    2 x 2 = 4    
+
+Segitiga Terbalik:
+* * * * 
+* * * 
+* * 
+*</div>
+
+    <div class="output-label">TRIK TRACE MANUAL:</div>
+    <div class="output-box">Contoh: <br>for (i=1; i&lt;=3; i++) {<br> for (j=1; j&lt;=i; j++) {<br> cout&lt;&lt;j;<br> } <br>cout&lt;&lt;endl;<br> }
+
+Trace step-by-step:
+i=1: j=1 → cetak "1" → endl → output: 1
+i=2: j=1 → cetak "1", j=2 → cetak "2" → endl → output: 12
+i=3: j=1 → cetak "1", j=2 → cetak "2", j=3 → cetak "3" → endl → output: 123
+
+Hasil akhir:
+1
+12
+123</div>
+</div>
+        <div class="boxes">
+            <h3><em>7.</em> Perulangan WHILE</h3>
+            <p>Perulangan WHILE digunakan ketika kita tahu kondisi berhentinya tapi tidak tahu pasti berapa kali akan mengulang. While akan terus mengulang SELAMA kondisinya masih true (benar).</p>
+            <p>Bedanya dengan FOR: FOR untuk jumlah iterasi yang sudah pasti, WHILE untuk iterasi yang bergantung kondisi. Contoh: terus minta input sampai user ketik 'n', atau terus hitung sampai angka mencapai nilai tertentu.</p>
+            <p>PENTING: Pastikan kondisi bisa berubah menjadi false, jika tidak program akan loop selamanya (infinite loop)!</p>
+            <code>int main() {
+    int angka = 1;
+    
+    // <b>While loop sederhana</b>
+    cout &lt;&lt; "Hitungan mundur dari 5:" &lt;&lt; endl;
+    int hitung = 5;
+    while (hitung &gt;= 1) {
+        cout &lt;&lt; hitung &lt;&lt; "... ";
+        hitung--;
+    }
+    cout &lt;&lt; "Selesai!" &lt;&lt; endl &lt;&lt; endl;
+    
+    // <b>While dengan input user</b>
+    char jawab = 'y';
+    int counter = 0;
+    while (jawab == 'y' || jawab == 'Y') {
+        counter++;
+        cout &lt;&lt; "Loop ke-" &lt;&lt; counter &lt;&lt; ": Halo!" &lt;&lt; endl;
+        cout &lt;&lt; "Ulangi lagi? (y/n): ";
+        cin &gt;&gt; jawab;
+    }
+    cout &lt;&lt; "Program berhenti. Total loop: " &lt;&lt; counter &lt;&lt; endl;
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">Hitungan mundur dari 5:
+5... 4... 3... 2... 1... Selesai!
+
+Loop ke-1: Halo!
+Ulangi lagi? (y/n): y
+Loop ke-2: Halo!
+Ulangi lagi? (y/n): y
+Loop ke-3: Halo!
+Ulangi lagi? (y/n): n
+Program berhenti. Total loop: 3</div>
+        </div>
+
+        <div class="boxes">
+            <h3><em>8.</em> Perulangan DO-WHILE</h3>
+            <p>DO-WHILE mirip dengan WHILE, tetapi dengan satu perbedaan krusial: DO-WHILE <strong>mengecek kondisi SETELAH menjalankan kode</strong>, sehingga dijamin dijalankan minimal 1 kali. While mengecek kondisi SEBELUM menjalankan kode.</p>
+            <p>Kapan pakai DO-WHILE? Ketika kita ingin kode dijalankan dulu minimal sekali baru cek kondisi. Contoh: menu program yang harus tampil dulu sebelum user memilih keluar, atau validasi input yang harus dicoba minimal sekali.</p>
+            <p>Struktur: <strong>do { kode } while (kondisi);</strong> - perhatikan titik koma setelah while!</p>
+            <code>int main() {
+    int angka;
+    int jumlah = 0;
+    int count = 0;
+    
+    cout &lt;&lt; "=== PROGRAM PENJUMLAHAN ===" &lt;&lt; endl;
+    cout &lt;&lt; "Masukkan angka untuk dijumlahkan" &lt;&lt; endl;
+    cout &lt;&lt; "(Masukkan 0 untuk selesai dan lihat hasil)" &lt;&lt; endl &lt;&lt; endl;
+    
+    // Do-while akan jalan minimal 1 kali
+    <b>do {
+        cout &lt;&lt; "Masukkan angka: ";
+        cin &gt;&gt; angka;
+        
+        if (angka != 0) {
+            jumlah += angka;  // Tambahkan ke total
+            count++;
+            cout &lt;&lt; "Total sementara: " &lt;&lt; jumlah &lt;&lt; endl;
+        }
+    } while (angka != 0);  // Terus ulang sampai user input 0</b>
+    
+    cout &lt;&lt; "\n=== HASIL ===" &lt;&lt; endl;
+    cout &lt;&lt; "Total angka yang dimasukkan: " &lt;&lt; count &lt;&lt; endl;
+    cout &lt;&lt; "Jumlah total: " &lt;&lt; jumlah &lt;&lt; endl;
+    if (count &gt; 0) {
+        cout &lt;&lt; "Rata-rata: " &lt;&lt; (float)jumlah/count &lt;&lt; endl;
+    }
+    cout &lt;&lt; "Program selesai!" &lt;&lt; endl;
+    
+    return 0;
+}</code>
+            <div class="output-label">Output Console:</div>
+            <div class="output-box">=== PROGRAM PENJUMLAHAN ===
+Masukkan angka untuk dijumlahkan
+(Masukkan 0 untuk selesai dan lihat hasil)
+
+Masukkan angka: 10
+Total sementara: 10
+Masukkan angka: 25
+Total sementara: 35
+Masukkan angka: 15
+Total sementara: 50
+Masukkan angka: 0
+
+=== HASIL ===
+Total angka yang dimasukkan: 3
+Jumlah total: 50
+Rata-rata: 16.6667
+Program selesai!</div>
+        </div>
+
+        <div class="summary-table">
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Materi</th>
+                    <th>Fokus Utama</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Struktur Dasar</td>
+                    <td>main(), iostream, return 0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Input/Output</td>
+                    <td>cin, cout, &lt;&lt;, &gt;&gt;, endl</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tipe Data</td>
+                    <td>int, float, char, string, bool</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>IF-ELSE</td>
+                    <td>Percabangan kondisional</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>SWITCH-CASE</td>
+                    <td>Percabangan multi pilihan</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>FOR Loop</td>
+                    <td>Perulangan dengan iterasi tetap</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>WHILE Loop</td>
+                    <td>Perulangan dengan kondisi awal</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>DO-WHILE Loop</td>
+                    <td>Perulangan dengan kondisi akhir</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+        <!-- Pop Quiz Section -->
+    <div id="quiz">
+        <br>
+    </div>
+
+    <div class="content-section">
+        <div class="chapter-title">
+            <em>Pop</em> Quiz
+        </div>
+        
+        <div class="quiz-container">
+            <div class="quiz-progress" id="quizProgress">Pertanyaan 1 dari 10</div>
+            
+            <div id="quizContent">
+            </div>
+        </div>
+    </div>
+
+    <div class="quote">
+        "If only your <em>dreams</em> were bigger than your <em>doubt</em>,<br>
+        perhaps the universe would've <em>bent</em><br>
+        ever so slightly<br>
+        to let you breathe among the stars.<br>
+        But you chose the <em>ground</em> instead,
+        and the ground chose to <em>keep you</em>."<br><br><br>
+        <h3>Jika ada yang mau ditanya silahkan tanya ke William @wil.liamsolomon hehe</h3>
+    </div>
+
+
+    <script>
+    // Quiz Data
+    const quizData = [
+        {
+            question: "Apa kepanjangan dari HTML?",
+            options: [
+                "Hyperlinks and Text Markup Language",
+                "HyperText Markup Language",
+                "Home Tool Markup Language",
+                "Hyper Transfer Markup Language"
+            ],
+            correct: 1,
+            explanation: "HTML adalah singkatan dari HyperText Markup Language. 'HyperText' berarti teks yang memiliki link/tautan ke teks lain, dan 'Markup Language' berarti bahasa yang menggunakan tag untuk menandai elemen-elemen dalam dokumen."
+        },
+        {
+            question: "Tag HTML mana yang digunakan untuk membuat heading paling besar?",
+            options: [
+                "&lt;h6&gt;",
+                "&lt;heading&gt;",
+                "&lt;h1&gt;",
+                "&lt;head&gt;"
+            ],
+            correct: 2,
+            explanation: "Tag &lt;h1&gt; adalah heading level 1 yang paling besar dan paling penting dalam hierarki heading HTML. Angka semakin besar (h2, h3, ... h6) maka ukuran heading semakin kecil."
+        },
+        {
+            question: "Atribut HTML mana yang digunakan untuk menentukan tujuan link?",
+            options: [
+                "src",
+                "href",
+                "link",
+                "url"
+            ],
+            correct: 1,
+            explanation: "Atribut 'href' (hypertext reference) pada tag &lt;a&gt; digunakan untuk menentukan URL atau alamat tujuan link. Contoh: &lt;a href='https://google.com'&gt;Google&lt;/a&gt;"
+        },
+        {
+            question: "Pada tabel HTML, apa fungsi dari atribut 'colspan'?",
+            options: [
+                "Menggabungkan sel secara vertikal (ke bawah)",
+                "Mengatur warna kolom",
+                "Menggabungkan sel secara horizontal (ke samping)",
+                "Mengatur lebar kolom"
+            ],
+            correct: 2,
+            explanation: "Atribut 'colspan' digunakan untuk menggabungkan sel secara HORIZONTAL (ke samping). Misalnya colspan='2' artinya sel tersebut mengambil ruang 2 kolom. Untuk menggabungkan secara vertikal, gunakan 'rowspan'."
+        },
+        {
+            question: "Tag &lt;input type='radio'&gt; digunakan untuk:",
+            options: [
+                "Input teks panjang",
+                "Pilihan ganda yang bisa dipilih lebih dari satu",
+                "Pilihan ganda yang hanya bisa dipilih satu",
+                "Upload file"
+            ],
+            correct: 2,
+            explanation: "Tag &lt;input type='radio'&gt; digunakan untuk pilihan tunggal (hanya bisa pilih satu opsi). Untuk pilihan yang bisa lebih dari satu, gunakan type='checkbox'."
+        },
+        {
+            question: "Dalam C++, apa output dari program berikut?\n\nint x = 10;\ncout << x++ << endl;\ncout << x << endl;",
+            options: [
+                "10 kemudian 10",
+                "11 kemudian 11",
+                "10 kemudian 11",
+                "11 kemudian 10"
+            ],
+            correct: 2,
+            explanation: "x++ adalah post-increment. Nilai x ditampilkan DULU (10), BARU ditambah 1. Jadi output pertama 10, kemudian x menjadi 11, output kedua 11. Berbeda dengan ++x (pre-increment) yang menambah dulu baru menampilkan."
+        },
+        {
+            question: "Tipe data mana yang paling tepat untuk menyimpan nilai 3.14159?",
+            options: [
+                "int",
+                "char",
+                "bool",
+                "double"
+            ],
+            correct: 3,
+            explanation: "Tipe data 'double' digunakan untuk menyimpan bilangan desimal dengan presisi tinggi. 'int' hanya untuk bilangan bulat, 'char' untuk karakter tunggal, dan 'bool' untuk true/false."
+        },
+        {
+            question: "Apa perbedaan utama antara perulangan WHILE dan DO-WHILE?",
+            options: [
+                "WHILE lebih cepat dari DO-WHILE",
+                "DO-WHILE mengecek kondisi di awal, WHILE di akhir",
+                "WHILE mengecek kondisi di awal, DO-WHILE di akhir",
+                "Tidak ada perbedaan"
+            ],
+            correct: 2,
+            explanation: "WHILE mengecek kondisi SEBELUM menjalankan kode (di awal), jadi bisa jadi tidak dijalankan sama sekali. DO-WHILE mengecek kondisi SETELAH menjalankan kode (di akhir), jadi dijamin dijalankan minimal 1 kali."
+        },
+        {
+            question: "Dalam struktur SWITCH-CASE, apa fungsi dari perintah 'break'?",
+            options: [
+                "Menghentikan program",
+                "Mengulangi case dari awal",
+                "Keluar dari switch setelah case dijalankan",
+                "Pindah ke case berikutnya"
+            ],
+            correct: 2,
+            explanation: "Perintah 'break' berfungsi untuk keluar dari blok switch setelah case yang cocok dijalankan. Tanpa break, program akan terus menjalankan case-case berikutnya (fall-through) meskipun sudah menemukan case yang cocok."
+        },
+        {
+            question: "Operator mana yang digunakan untuk OUTPUT dalam C++?",
+            options: [
+                ">>",
+                "<<",
+                "&&",
+                "||"
+            ],
+            correct: 1,
+            explanation: "Operator << (insertion operator) digunakan dengan 'cout' untuk OUTPUT (menampilkan data ke layar). Operator >> (extraction operator) digunakan dengan 'cin' untuk INPUT (membaca data dari keyboard)."
+        },
+
+        {
+            question: "Atribut 'cellpadding' pada tabel HTML berfungsi untuk:",
+            options: [
+                "Mengatur jarak antar sel",
+                "Mengatur jarak dari isi sel ke border sel",
+                "Mengatur ketebalan border tabel",
+                "Mengatur lebar kolom tabel"
+            ],
+            correct: 1,
+            explanation: "Atribut 'cellpadding' mengatur jarak antara KONTEN sel dengan BORDER sel (jarak dalam). Sedangkan 'cellspacing' mengatur jarak ANTAR sel (jarak luar)."
+        },
+        {
+            question: "Pada list HTML, untuk membuat ordered list dengan huruf besar (A, B, C), atribut type yang digunakan adalah:",
+            options: [
+                "type='a'",
+                "type='A'",
+                "type='alpha'",
+                "type='upper'"
+            ],
+            correct: 1,
+            explanation: "Untuk ordered list (&lt;ol&gt;) dengan huruf besar, gunakan type='A'. Pilihan lain: type='a' untuk huruf kecil, type='I' untuk romawi besar, type='i' untuk romawi kecil, type='1' untuk angka."
+        },
+        {
+            question: "Atribut 'method' pada form HTML memiliki 2 nilai utama. Manakah yang tepat untuk mengirim data sensitif seperti password?",
+            options: [
+                "GET",
+                "POST",
+                "SEND",
+                "SUBMIT"
+            ],
+            correct: 1,
+            explanation: "Method 'POST' digunakan untuk data sensitif karena data tidak terlihat di URL. Method 'GET' menampilkan data di URL sehingga tidak aman untuk password atau data rahasia."
+        },
+        {
+            question: "Apa output dari kode C++ berikut?\n\nfor (int i = 1; i <= 3; i++) {\n    for (int j = 1; j <= 2; j++) {\n        cout << i + j << \" \";\n    }\n    cout << endl;\n}",
+            options: [
+                "2 3\n3 4\n4 5",
+                "1 2\n2 3\n3 4",
+                "2 3 4\n3 4 5",
+                "1 1\n2 2\n3 3"
+            ],
+            correct: 0,
+            explanation: "Mari trace step-by-step dengan tabel:<br><br><table border='1' style='border-collapse: collapse; margin: 10px 0; color: inherit;'><tr><th>Iterasi</th><th>i</th><th>j</th><th>i+j</th><th>Output</th></tr><tr><td>1</td><td>1</td><td>1</td><td>2</td><td>2 </td></tr><tr><td>2</td><td>1</td><td>2</td><td>3</td><td>3 (lalu endl)</td></tr><tr><td>3</td><td>2</td><td>1</td><td>3</td><td>3 </td></tr><tr><td>4</td><td>2</td><td>2</td><td>4</td><td>4 (lalu endl)</td></tr><tr><td>5</td><td>3</td><td>1</td><td>4</td><td>4 </td></tr><tr><td>6</td><td>3</td><td>2</td><td>5</td><td>5 (lalu endl)</td></tr></table>Hasil akhir:<br>2 3<br>3 4<br>4 5"
+        },
+        {
+            question: "Kode berikut akan menghasilkan output apa?\n\nfor (int i = 1; i <= 3; i++) {\n    for (int j = i; j <= 3; j++) {\n        cout << \"*\";\n    }\n    cout << endl;\n}",
+            options: [
+                "***\n**\n*",
+                "*\n**\n***",
+                "***\n***\n***",
+                "Error"
+            ],
+            correct: 0,
+            explanation: "Loop dalam dimulai dari i (bukan dari 1), jadi semakin ke bawah semakin sedikit:<br><br><table border='1' style='border-collapse: collapse; margin: 10px 0; color: inherit;'><tr><th>i</th><th>j (range)</th><th>Jumlah *</th><th>Output Baris</th></tr><tr><td>1</td><td>1, 2, 3</td><td>3</td><td>***</td></tr><tr><td>2</td><td>2, 3</td><td>2</td><td>**</td></tr><tr><td>3</td><td>3</td><td>1</td><td>*</td></tr></table>Pola segitiga terbalik karena j dimulai dari i (nilai i semakin besar, range j semakin kecil)."
+        },
+        {
+            question: "Apa yang salah dengan nested loop berikut sehingga menyebabkan infinite loop?\n\nfor (int i = 1; i <= 3; i++) {\n    for (int j = 1; j <= 3; i++) {\n        cout << \"X\";\n    }\n}",
+            options: [
+                "Variabel i tidak dideklarasikan",
+                "Loop dalam increment i bukan j",
+                "Kondisi j <= 3 salah",
+                "Tidak ada cout << endl"
+            ],
+            correct: 1,
+            explanation: "Bug fatal! Perhatikan loop dalam:<br><br><code style='display: block; background: rgba(255,255,255,0.1); padding: 10px; margin: 10px 0;'>for (int j = 1; j <= 3; i++) // ← BUG: increment i!</code><br><table border='1' style='border-collapse: collapse; margin: 10px 0; color: inherit;'><tr><th>Iterasi</th><th>i</th><th>j</th><th>Apa yang terjadi?</th></tr><tr><td>1</td><td>1→2</td><td>1</td><td>i bertambah (SALAH!)</td></tr><tr><td>2</td><td>2→3</td><td>1</td><td>j tetap 1, i terus bertambah</td></tr><tr><td>3</td><td>3→4</td><td>1</td><td>j TIDAK PERNAH BERTAMBAH!</td></tr><tr><td>∞</td><td>∞</td><td>1</td><td>Infinite loop karena j <= 3 selalu TRUE</td></tr></table>Harusnya: <code style='background: rgba(100,200,100,0.2); padding: 2px 6px;'>j++</code> bukan <code style='background: rgba(200,100,100,0.2); padding: 2px 6px;'>i++</code>"
+        },
+        {
+            question: "Berapa kali total cout dieksekusi dalam nested loop berikut?\n\nfor (int i = 1; i <= 4; i++) {\n    for (int j = 1; j <= i; j++) {\n        cout << j;\n    }\n}",
+            options: [
+                "4 kali",
+                "8 kali",
+                "10 kali",
+                "16 kali"
+            ],
+            correct: 2,
+            // explanation: "i=1: 1 kali, i=2: 2 kali, i=3: 3 kali, i=4: 4 kali. Total = 1+2+3+4 = 10 kali. Pola: jumlah iterasi = n(n+1)/2 dimana n adalah batas loop luar."
+            explanation: "Hitung iterasi loop dalam di setiap nilai i:<br><br><table border='1' style='border-collapse: collapse; margin: 10px 0; color: inherit;'><tr><th>i</th><th>j (range)</th><th>cout dieksekusi</th><th>Output</th></tr><tr><td>1</td><td>1</td><td>1x</td><td>1</td></tr><tr><td>2</td><td>1, 2</td><td>2x</td><td>12</td></tr><tr><td>3</td><td>1, 2, 3</td><td>3x</td><td>123</td></tr><tr><td>4</td><td>1, 2, 3, 4</td><td>4x</td><td>1234</td></tr><tr><td colspan='2'><strong>TOTAL</strong></td><td><strong>1+2+3+4 = 10x</strong></td><td></td></tr></table>Rumus cepat: n(n+1)/2 = 4(5)/2 = 10"
+        },
+        {
+            question: "Kode nested loop berikut akan menghasilkan ERROR. Apa penyebabnya?\n\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        cout << arr[i][j];\n    }\n}",
+            options: [
+                "Kondisi loop salah",
+                "Array arr tidak dideklarasikan",
+                "Increment salah",
+                "Tidak ada endl"
+            ],
+            correct: 1,
+            explanation: "Error karena array 'arr' tidak dideklarasikan sebelumnya. Untuk mengakses array 2D, harus dideklarasikan dulu, contoh: int arr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};"
+        },
+        {
+            question: "Apa output dari kode berikut?\n\nfor (int i = 0; i < 2; i++) {\n    for (int j = 0; j < 2; j++) {\n        if (i == j) cout << \"1 \";\n        else cout << \"0 \";\n    }\n    cout << endl;\n}",
+            options: [
+                "1 0\n0 1",
+                "0 1\n1 0",
+                "1 1\n0 0",
+                "0 0\n1 1"
+            ],
+            correct: 0,
+            explanation: "i=0,j=0: sama→1; i=0,j=1: beda→0 → baris 1: '1 0'. i=1,j=0: beda→0; i=1,j=1: sama→1 → baris 2: '0 1'. Ini membuat pola identitas matrix diagonal."
+        },
+        {
+            question: "Dalam CSS, apa perbedaan antara 'padding' dan 'margin'?",
+            options: [
+                "Padding untuk jarak luar, margin untuk jarak dalam",
+                "Padding untuk jarak dalam, margin untuk jarak luar",
+                "Keduanya sama saja",
+                "Padding untuk teks, margin untuk gambar"
+            ],
+            correct: 1,
+            explanation: "PADDING = jarak DALAM (dari border ke konten). MARGIN = jarak LUAR (dari border ke elemen lain). Bayangkan kotak: padding adalah ruang dalam kotak, margin adalah jarak antar kotak."
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+        answered = false;
+        const question = quizData[currentQuestion];
+        const quizContent = document.getElementById('quizContent');
+        
+        let optionsHTML = '';
+        question.options.forEach((option, index) => {
+            optionsHTML += `
+                <button class="option-btn" onclick="checkAnswer(${index})" id="option${index}">
+                    ${String.fromCharCode(65 + index)}. ${option}
+                </button>
+            `;
+        });
+        
+        quizContent.innerHTML = `
+            <div class="question-box">
+                <div class="question-text">
+                    <strong>Pertanyaan ${currentQuestion + 1}:</strong><br><br>
+                    ${question.question.replace(/\n/g, '<br>')}
+                </div>
+                <div class="options">
+                    ${optionsHTML}
+                </div>
+                <div id="explanationBox"></div>
+            </div>
+        `;
+        
+        document.getElementById('quizProgress').textContent = `Pertanyaan ${currentQuestion + 1} dari ${quizData.length}`;
+    }
+
+    function checkAnswer(selectedIndex) {
+        if (answered) return;
+        answered = true;
+        
+        const question = quizData[currentQuestion];
+        const isCorrect = selectedIndex === question.correct;
+        
+        if (isCorrect) {
+            score++;
+        }
+        
+        // Disable all buttons and show result
+        for (let i = 0; i < question.options.length; i++) {
+            const btn = document.getElementById(`option${i}`);
+            btn.disabled = true;
+            
+            if (i === question.correct) {
+                btn.classList.add('correct');
+            } else if (i === selectedIndex && !isCorrect) {
+                btn.classList.add('wrong');
+            }
+        }
+        
+        // Show explanation
+        const explanationBox = document.getElementById('explanationBox');
+        explanationBox.innerHTML = `
+            <div class="explanation">
+                <h4>${isCorrect ? '✓ Benar!' : '✗ Kurang Tepat'}</h4>
+                <p>${question.explanation}</p>
+            </div>
+            ${currentQuestion < quizData.length - 1 
+                ? '<button class="next-btn" onclick="nextQuestion()">Pertanyaan Selanjutnya →</button>'
+                : '<button class="next-btn" onclick="showResult()">Lihat Hasil</button>'
+            }
+        `;
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        loadQuestion();
+    }
+
+    function showResult() {
+        const quizContent = document.getElementById('quizContent');
+        const percentage = Math.round((score / quizData.length) * 100);
+        
+        let message = '';
+        if (percentage >= 90) {
+            message = 'Luar biasa! Kamu sangat menguasai materi! (keknya) 🌟';
+        } else if (percentage >= 70) {
+            message = 'Bagus! Kamu sudah memahami sebagian besar materi! (keknya) 👍';
+        } else if (percentage >= 50) {
+            message = 'Cukup baik! Blajar lagi y 📚';
+        } else {
+            message = 'Tetap semangat! Baca lagi materinya! 💪';
+        }
+        
+        quizContent.innerHTML = `
+            <div class="quiz-result">
+                <h3>Quiz Selesai!</h3>
+                <div class="score-display">${score} / ${quizData.length}</div>
+                <p style="font-size: 1.3rem; color: rgba(74, 78, 105); margin: 1rem 0;">
+                    Persentase: ${percentage}%
+                </p>
+                <p style="font-size: 1.2rem; color: rgba(154, 140, 152); margin: 2rem 0;">
+                    ${message}
+                </p>
+                <button class="retry-btn" onclick="resetQuiz()">Coba Lagi</button>
+            </div>
+        `;
+        
+        document.getElementById('quizProgress').textContent = 'Quiz Selesai!';
+    }
+
+    function resetQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        answered = false;
+        loadQuestion();
+    }
+
+    function exportToPDF() {
+        window.print();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        loadQuestion();
+    });
+</script>
+</body>
+</html>
